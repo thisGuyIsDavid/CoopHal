@@ -6,6 +6,7 @@ class Thermometer:
 
     def __init__(self):
         self.i2c_bus = None
+        self.set_sensor()
 
     def set_sensor(self):
         if utils.is_on_raspberry_pi():
