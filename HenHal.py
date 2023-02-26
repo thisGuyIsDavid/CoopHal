@@ -29,6 +29,9 @@ class HenHal:
         self.red_light.on()
         while True:
             print(self.on_board_thermometer.get_temperature())
+
+
+
             time.sleep(5)
 
     def run_hen_hal(self):
