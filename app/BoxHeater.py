@@ -1,13 +1,13 @@
 from simple_pid import PID
 from app.devices import Fan
-from app.devices import HeatBar
+from app.devices import LeftRelay
 from app.devices import Thermometer
 
 
 class BoxHeater:
     TEMP_TO_MAINTAIN = 50
 
-    def __init__(self, fan: Fan, heat_bar: HeatBar, thermometer: Thermometer):
+    def __init__(self, fan: Fan, heat_bar: LeftRelay, thermometer: Thermometer):
         self.fan = fan
         self.heat_bar = heat_bar
         self.thermometer = thermometer
@@ -43,6 +43,6 @@ class BoxHeater:
 if __name__ == '__main__':
     BoxHeater(
         fan=Fan(),
-        heat_bar=HeatBar(),
+        heat_bar=LeftRelay(),
         thermometer=Thermometer()
     )

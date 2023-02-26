@@ -1,2 +1,2 @@
-from .HeatBar import HeatBar
-from .Fan import Fan
+from .LeftRelay import LeftRelay
+from .RightRelay import RightRelay

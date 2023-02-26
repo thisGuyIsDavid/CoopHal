@@ -12,3 +12,9 @@ class DeviceInterface:
 
     def set_device(self):
         pass
+
+    def get_status(self) -> bool:
+        """
+        :return: True if relay is on/active/current is flowing, False if relay is off/inactive/current_is_not_flowing.
+        """
+        return self.device.value == 1

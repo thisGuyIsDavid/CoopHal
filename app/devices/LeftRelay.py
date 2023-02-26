@@ -1,5 +1,5 @@
 from app.devices.RelayInterface import RelayInterface
 
-
-class HeatBar(RelayInterface):
+#   16
+class LeftRelay(RelayInterface):
     pass

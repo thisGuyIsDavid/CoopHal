@@ -11,7 +11,11 @@ class RedLight(DeviceInterface):
         from gpiozero import PWMLED
         print('PWM light.')
         self.device = PWMLED(12)
-        self.device.pulse()
-        time.sleep(2)
         self.device.off()
+
+    def get_status(self) -> bool:
+        return self.device.is_lit
+
+    def pulse(self):
+        self.device.pulse()
 

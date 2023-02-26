@@ -1,7 +1,7 @@
 import unittest
 from app.BoxHeater import BoxHeater
 from app.devices import Thermometer
-from app.devices import HeatBar
+from app.devices import LeftRelay
 from app.devices import Fan
 
 
@@ -14,7 +14,7 @@ class DummyFan(Fan):
     pass
 
 
-class DummyHeatBar(HeatBar):
+class DummyHeatBar(LeftRelay):
     pass
 
 
