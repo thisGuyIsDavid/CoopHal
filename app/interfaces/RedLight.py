@@ -8,3 +8,5 @@ class RedLight(DeviceInterface):
             return
         from gpiozero import PWMLED
         self.device = PWMLED(12)
+        self.device.on()
+
