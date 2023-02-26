@@ -21,6 +21,7 @@ class RelayInterface(DeviceInterface):
         if self.is_on_pi:
             from gpiozero import DigitalOutputDevice
             self.device = DigitalOutputDevice(self.pin_number, active_high=False, initial_value=True)
+            self.off()
         else:
             self.device = DummyDevice()
 

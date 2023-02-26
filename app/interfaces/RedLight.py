@@ -19,3 +19,8 @@ class RedLight(DeviceInterface):
     def pulse(self):
         self.device.pulse()
 
+    def on(self):
+        self.device.on()
+
+    def off(self):
+        self.device.off()
