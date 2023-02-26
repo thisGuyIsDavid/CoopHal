@@ -1,1 +1,1 @@
-from RedLight import RedLight
+from .RedLight import RedLight
