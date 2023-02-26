@@ -1,4 +1,3 @@
-from app.interfaces import RedLight
 from app.sensors import OnBoardThermometer
 import time
 
