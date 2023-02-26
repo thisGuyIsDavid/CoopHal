@@ -1,4 +1,5 @@
 from app.sensors import OnBoardThermometer
+from app.interfaces import RedLight
 import time
 
 
@@ -6,6 +7,7 @@ class HenHal:
 
     def __init__(self, **kwargs):
         self.on_board_thermometer: OnBoardThermometer = OnBoardThermometer()
+        self.red_light: RedLight = RedLight()
 
     def run(self):
         while True:

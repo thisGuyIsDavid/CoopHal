@@ -6,11 +6,13 @@ from app.devices.DeviceInterface import DeviceInterface
 class OnBoardThermometer(DeviceInterface):
 
     def set_device(self):
-        if is_on_raspberry_pi():
+        if self.is_on_pi:
             import smbus
             self.device = smbus.SMBus(1)
 
     def get_temperature(self) -> int:
+        if not self.is_on_pi:
+            return -999
         self.device.write_i2c_block_data(0x44, 0x2C, [0x06])
         time.sleep(1)
         data = self.device.read_i2c_block_data(0x44, 0x00, 6)

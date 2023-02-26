@@ -1,5 +1,4 @@
 from app.devices.DeviceInterface import DeviceInterface
-from app.utils import is_on_raspberry_pi
 
 
 class DummyDevice(DeviceInterface):
@@ -18,7 +17,7 @@ class RelayInterface(DeviceInterface):
         self.pin_number: int = kwargs.get('pin_number')
 
     def set_device(self):
-        if is_on_raspberry_pi():
+        if self.is_on_pi:
             from gpiozero import DigitalOutputDevice
             self.device = DigitalOutputDevice(self.pin_number, active_high=False, initial_value=True)
         else:
