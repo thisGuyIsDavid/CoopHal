@@ -12,9 +12,10 @@ class DummyDevice(DeviceInterface):
 
 
 class RelayInterface(DeviceInterface):
+
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
         self.pin_number: int = kwargs.get('pin_number')
+        super().__init__(**kwargs)
 
     def set_device(self):
         if self.is_on_pi:
