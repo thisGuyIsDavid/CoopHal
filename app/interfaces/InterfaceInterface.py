@@ -1,0 +1,3 @@
+
+class InterfaceInterface:
+    pass
