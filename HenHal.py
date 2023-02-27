@@ -76,6 +76,6 @@ if __name__ == '__main__':
     HenHal(
         relay_1=26,
         relay_2=19,
-        relay_3=16,
-        relay_4=20
+        relay_3=20,
+        relay_4=16
     ).run_hen_hal()
