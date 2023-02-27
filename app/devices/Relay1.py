@@ -1,5 +1,5 @@
 from app.devices.RelayInterface import RelayInterface
 
 
-class RightRelay(RelayInterface):
+class Relay1(RelayInterface):
     pass
