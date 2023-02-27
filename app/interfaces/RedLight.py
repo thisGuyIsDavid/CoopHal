@@ -28,6 +28,7 @@ class RedLight(DeviceInterface):
         self.device.off()
 
     def check_connection(self):
+        self.pulse()
         if self.is_connected():
             self.device.on()
         else:

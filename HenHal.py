@@ -25,15 +25,24 @@ class HenHal:
         time.sleep(1)
 
     def run(self):
-        self.run_test()
-        self.red_light.on()
+        iterations = 0
         while True:
-            print(self.on_board_thermometer.get_temperature())
-            self.red_light.check_connection()
+            #   Once a minute.
+            if iterations % 12 == 0:
+                self.red_light.check_connection()
+                #   Iterations also resets once a minute.
+                iterations = 0
+
+            #   Once every thirty seconds.
+            if iterations % 6 == 0:
+                self.on_board_thermometer.get_temperature()
+
             time.sleep(5)
+            iterations += 1
 
     def run_hen_hal(self):
         try:
+            self.run_test()
             self.run()
         except KeyboardInterrupt as e:
             return
