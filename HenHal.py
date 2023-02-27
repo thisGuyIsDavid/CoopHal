@@ -29,9 +29,7 @@ class HenHal:
         self.red_light.on()
         while True:
             print(self.on_board_thermometer.get_temperature())
-
-
-
+            self.red_light.check_connection()
             time.sleep(5)
 
     def run_hen_hal(self):
@@ -39,6 +37,8 @@ class HenHal:
             self.run()
         except KeyboardInterrupt as e:
             return
+        finally:
+            self.red_light.off()
 
 
 if __name__ == '__main__':
