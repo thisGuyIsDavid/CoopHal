@@ -1,3 +1,4 @@
 .idea/
 venv/
 *.pyc
+*.cpython-39.pyc

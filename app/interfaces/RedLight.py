@@ -33,6 +33,7 @@ class RedLight(DeviceInterface):
         else:
             self.device.off()
 
+    @staticmethod
     def is_connected(host="8.8.8.8", port=53, timeout=3) -> bool:
         #   https://stackoverflow.com/questions/3764291/how-can-i-see-if-theres-an-available-and-active-network-connection-in-python
         try:
