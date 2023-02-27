@@ -37,15 +37,19 @@ class HenHal:
     def run(self):
         iterations = 0
         while True:
+            #   Once every five minutes
+            if iterations % 60 == 0:
+                self.on_board_thermometer.get_temperature()
+                #   Iterations also resets.
+                iterations = 0
+
             #   Once a minute.
             if iterations % 12 == 0:
                 self.red_light.check_connection()
-                #   Iterations also resets once a minute.
-                iterations = 0
 
             #   Once every thirty seconds.
             if iterations % 6 == 0:
-                self.on_board_thermometer.get_temperature()
+               pass
 
             time.sleep(5)
             iterations += 1

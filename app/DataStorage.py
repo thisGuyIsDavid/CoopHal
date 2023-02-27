@@ -5,7 +5,7 @@ import sqlite3
 class DataStorage:
 
     def __init__(self):
-        self.db = sqlite3.connect('data.db')
+        self.db = sqlite3.connect('data_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.db')
         self.setup()
 
     def setup(self):
@@ -36,3 +36,7 @@ class DataStorage:
         response = cursor.fetchall()
         print(response)
         cursor.close()
+
+if __name__ == '__main__':
+    db_name = 'data_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+    print(db_name)
