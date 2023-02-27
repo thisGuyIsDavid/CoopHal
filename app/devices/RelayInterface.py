@@ -18,6 +18,7 @@ class RelayInterface(DeviceInterface):
         super().__init__(**kwargs)
 
     def set_device(self):
+        self.database.record_value('relay', self.name, 'setup')
         if self.is_on_pi:
             from gpiozero import DigitalOutputDevice
             self.device = DigitalOutputDevice(self.pin_number, active_high=False, initial_value=True)
@@ -26,9 +27,11 @@ class RelayInterface(DeviceInterface):
             self.device = DummyDevice()
 
     def on(self):
+        self.database.record_value('relay', self.name, 'on')
         self.device.on()
 
     def off(self):
+        self.database.record_value('relay', self.name, 'off')
         self.device.off()
 
     def get_status(self) -> bool:

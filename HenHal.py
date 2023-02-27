@@ -2,16 +2,26 @@ from app.sensors import OnBoardThermometer
 from app.interfaces import RedLight
 from app.devices import LeftRelay, RightRelay
 from app.devices.RelayInterface import RelayInterface
+from app.DataStorage import DataStorage
 import time
 
 
 class HenHal:
 
     def __init__(self, **kwargs):
-        self.on_board_thermometer: OnBoardThermometer = OnBoardThermometer()
-        self.left_relay: RelayInterface = LeftRelay(pin_number=kwargs.get('left_relay'))
-        self.right_relay: RelayInterface = RightRelay(pin_number=kwargs.get('right_relay'))
-        self.red_light: RedLight = RedLight()
+        self.database: DataStorage = DataStorage()
+        self.on_board_thermometer: OnBoardThermometer = OnBoardThermometer(database=self.database)
+        self.left_relay: RelayInterface = LeftRelay(
+            name='left relay',
+            pin_number=kwargs.get('left_relay'),
+            database=self.database
+        )
+        self.right_relay: RelayInterface = RightRelay(
+            name='right_relay',
+            pin_number=kwargs.get('right_relay'),
+            database=self.database
+        )
+        self.red_light: RedLight = RedLight(database=self.database)
 
     def run_test(self):
         self.red_light.pulse()

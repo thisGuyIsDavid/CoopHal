@@ -1,5 +1,5 @@
-import os, time
-from app.utils import is_on_raspberry_pi
+import time
+
 from app.devices.DeviceInterface import DeviceInterface
 
 
@@ -18,4 +18,6 @@ class OnBoardThermometer(DeviceInterface):
         data = self.device.read_i2c_block_data(0x44, 0x00, 6)
         temp = data[0] * 256 + data[1]
         temperature = -49 + (315 * temp / 65535.0)
-        return round(temperature, 2)
+        temperature = round(temperature, 2)
+        self.database.record_value('temperature', 'onboard', temperature)
+        return temperature

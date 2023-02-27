@@ -12,7 +12,6 @@ class RedLight(DeviceInterface):
         if not self.is_on_pi:
             return
         from gpiozero import PWMLED
-        print('PWM light.')
         self.device = PWMLED(12)
 
     def get_status(self) -> bool:
@@ -30,8 +29,10 @@ class RedLight(DeviceInterface):
     def check_connection(self):
         self.pulse()
         if self.is_connected():
+            self.database.record_value('internet', '', 'connected')
             self.device.on()
         else:
+            self.database.record_value('internet', '', 'not connected')
             self.device.off()
 
     @staticmethod

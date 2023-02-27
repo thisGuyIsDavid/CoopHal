@@ -1,12 +1,12 @@
 from app.utils import is_on_raspberry_pi
-
+from app.DataStorage import DataStorage
 
 class DeviceInterface:
 
     def __init__(self, **kwargs):
         self.name = kwargs.get('name')
         self.is_on_pi: bool = is_on_raspberry_pi()
-
+        self.database: DataStorage = kwargs.get('database')
         self.device = None
         self.set_device()
 
