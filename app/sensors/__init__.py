@@ -1,1 +1,3 @@
 from .OnBoardThermometer import OnBoardThermometer
+from .ProbeThermometer1 import ProbeThermometer1
+from .ProbeThermometer2 import ProbeThermometer2

@@ -3,8 +3,9 @@ import time
 from app.DataStorage import DataStorage
 from app.devices import Relay1, Relay2, Relay3, Relay4
 from app.devices.RelayInterface import RelayInterface
+from app.sensors.ProbeInterface import ProbeInterface
 from app.interfaces import RedLight
-from app.sensors import OnBoardThermometer
+from app.sensors import OnBoardThermometer, ProbeThermometer1, ProbeThermometer2
 
 
 class HenHal:
@@ -32,6 +33,9 @@ class HenHal:
             pin_number=kwargs.get('relay_4'),
             database=self.database
         )
+        self.probe_1: ProbeInterface = ProbeThermometer1(
+            probe_address=kwargs.get('probe_1')
+        )
         self.red_light: RedLight = RedLight(database=self.database)
 
     def run_test(self):
@@ -41,6 +45,7 @@ class HenHal:
             time.sleep(1)
             relay.off()
             time.sleep(1)
+        self.probe_1.get_temperature()
 
     def run(self):
         iterations = 0
@@ -77,5 +82,8 @@ if __name__ == '__main__':
         relay_1=26,
         relay_2=19,
         relay_3=20,
-        relay_4=16
+        relay_4=16,
+        probe_1='28-3de104570a6a'
+
+
     ).run_hen_hal()
