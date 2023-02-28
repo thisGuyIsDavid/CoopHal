@@ -45,7 +45,9 @@ class HenHal:
             time.sleep(1)
             relay.off()
             time.sleep(1)
-        self.probe_1.get_temperature()
+        x = self.probe_1.get_temperature()
+        print(x)
+        self.on_board_thermometer.get_temperature()
 
     def run(self):
         iterations = 0
