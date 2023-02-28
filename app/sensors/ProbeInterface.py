@@ -15,7 +15,7 @@ class ProbeInterface(DeviceInterface):
         self.device = self.BASE_DIR + self.probe_address + '/w1_slave'
 
     def get_raw(self):
-        with open(self.device + '/name') as raw_temp:
+        with open(self.device) as raw_temp:
             return raw_temp.readlines()
 
     def get_temperature(self) -> int:
