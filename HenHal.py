@@ -34,7 +34,12 @@ class HenHal:
             database=self.database
         )
         self.probe_1: ProbeInterface = ProbeThermometer1(
-            probe_address=kwargs.get('probe_1')
+            probe_address=kwargs.get('probe_1'),
+            database=self.database
+        )
+        self.probe_2: ProbeInterface = ProbeThermometer1(
+            probe_address=kwargs.get('probe_2'),
+            database=self.database
         )
         self.red_light: RedLight = RedLight(database=self.database)
 
@@ -45,9 +50,9 @@ class HenHal:
             time.sleep(1)
             relay.off()
             time.sleep(1)
-        x = self.probe_1.get_temperature()
-        print(x)
-        self.on_board_thermometer.get_temperature()
+        print(self.probe_1.get_temperature())
+        print(self.probe_2.get_temperature())
+        print(self.on_board_thermometer.get_temperature())
 
     def run(self):
         iterations = 0
@@ -85,7 +90,6 @@ if __name__ == '__main__':
         relay_2=19,
         relay_3=20,
         relay_4=16,
-        probe_1='28-3de104570a6a'
-
-
+        probe_1='28-3de104570a6a',
+        probe_2='28-3de10457d08e'
     ).run_hen_hal()
