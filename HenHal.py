@@ -69,7 +69,8 @@ class HenHal:
 
             #   Once every thirty seconds.
             if iterations % 6 == 0:
-               pass
+                print(self.probe_1.get_temperature())
+                print(self.probe_2.get_temperature())
 
             time.sleep(5)
             iterations += 1
