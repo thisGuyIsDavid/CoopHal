@@ -19,6 +19,13 @@ class ProbeInterface(DeviceInterface):
             return raw_temp.readlines()
 
     def get_temperature(self) -> int:
-        print(self.get_raw())
+        raw_rows = self.get_raw()
+        #   Ensure probe is up and reporting.
+        if raw_rows[0].strip()[-3:] != 'YES':
+            return -999
+        #   Temp row is the second row
+        raw_temp_row: str = raw_rows[1].strip()
+        raw_temp_value: str = raw_temp_row[raw_temp_row.find('t='):]
+        print(raw_temp_value)
         return 3
         pass
