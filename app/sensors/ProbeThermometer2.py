@@ -1,4 +1,4 @@
-from app.sensors import ProbeInterface
+from app.sensors.ProbeInterface import ProbeInterface
 
 
 class ProbeThermometer2(ProbeInterface):
