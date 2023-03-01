@@ -1,10 +1,7 @@
-from app.devices.DeviceInterface import DeviceInterface
-import os
-import glob
-import time
+from app.sensors.Thermometer import Thermometer
 
 
-class ProbeInterface(DeviceInterface):
+class ProbeInterface(Thermometer):
     BASE_DIR = '/sys/bus/w1/devices/'
 
     def __init__(self, **kwargs):

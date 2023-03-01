@@ -6,6 +6,7 @@ from app.devices.RelayInterface import RelayInterface
 from app.sensors.ProbeInterface import ProbeInterface
 from app.interfaces import RedLight
 from app.sensors import OnBoardThermometer, ProbeThermometer1, ProbeThermometer2
+from app.devices.Heater import Heater
 
 
 class HenHal:
@@ -41,6 +42,10 @@ class HenHal:
             probe_address=kwargs.get('probe_2'),
             database=self.database
         )
+        self.heater: Heater = Heater(
+            relay=self.relay_4,
+            thermometer=self.on_board_thermometer
+        )
         self.red_light: RedLight = RedLight(database=self.database)
 
     def run_test(self):
@@ -57,6 +62,7 @@ class HenHal:
     def run(self):
         iterations = 0
         while True:
+            self.heater.on()
             #   Once every five minutes
             if iterations % 60 == 0:
                 self.on_board_thermometer.get_temperature()
@@ -82,6 +88,7 @@ class HenHal:
         except KeyboardInterrupt as e:
             return
         finally:
+            self.heater.off()
             self.red_light.off()
 
 

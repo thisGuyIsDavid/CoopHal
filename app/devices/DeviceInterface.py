@@ -18,3 +18,9 @@ class DeviceInterface:
         :return: True if relay is on/active/current is flowing, False if relay is off/inactive/current_is_not_flowing.
         """
         return self.device.value == 1
+
+    def on(self):
+        pass
+
+    def off(self):
+        pass
