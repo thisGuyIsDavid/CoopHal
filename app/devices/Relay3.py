@@ -1,4 +1,4 @@
-from app.devices.RelayInterface import RelayInterface
+from app.interfaces.RelayInterface import RelayInterface
 
 
 class Relay3(RelayInterface):

@@ -1,7 +1,7 @@
-from app.sensors.Thermometer import Thermometer
+from app.interfaces.ThermometerInterface import ThermometerInterface
 
 
-class ProbeInterface(Thermometer):
+class ProbeInterface(ThermometerInterface):
     BASE_DIR = '/sys/bus/w1/devices/'
 
     def __init__(self, **kwargs):

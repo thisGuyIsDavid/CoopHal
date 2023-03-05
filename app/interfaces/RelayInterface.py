@@ -1,4 +1,4 @@
-from app.devices.DeviceInterface import DeviceInterface
+from app.interfaces.DeviceInterface import DeviceInterface
 
 
 class DummyDevice(DeviceInterface):

@@ -1,6 +1,7 @@
 from app.utils import is_on_raspberry_pi
 from app.DataStorage import DataStorage
 
+
 class DeviceInterface:
 
     def __init__(self, **kwargs):

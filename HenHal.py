@@ -1,19 +1,19 @@
 import time
-
+import datetime
 from app.DataStorage import DataStorage
 from app.devices import Relay1, Relay2, Relay3, Relay4
-from app.devices.RelayInterface import RelayInterface
-from app.sensors.ProbeInterface import ProbeInterface
-from app.interfaces import RedLight
-from app.sensors import OnBoardThermometer, ProbeThermometer1, ProbeThermometer2
+from app.interfaces.RelayInterface import RelayInterface
+from app.interfaces.ProbeInterface import ProbeInterface
+from app.indicators import RedLight
+from app.sensors import OnBoardThermometer, ProbeThermometer1
 from app.devices.Heater import Heater
 
 
 class HenHal:
+    RESET_SECONDS = 300
 
     def __init__(self, **kwargs):
         self.database: DataStorage = DataStorage()
-        self.on_board_thermometer: OnBoardThermometer = OnBoardThermometer(database=self.database)
         self.relay_1: RelayInterface = Relay1(
             name='relay 1',
             pin_number=kwargs.get('relay_1'),
@@ -34,11 +34,17 @@ class HenHal:
             pin_number=kwargs.get('relay_4'),
             database=self.database
         )
+        self.on_board_thermometer: OnBoardThermometer = OnBoardThermometer(
+            name='Onboard',
+            database=self.database
+        )
         self.probe_1: ProbeInterface = ProbeThermometer1(
+            name='Coop',
             probe_address=kwargs.get('probe_1'),
             database=self.database
         )
         self.probe_2: ProbeInterface = ProbeThermometer1(
+            name='Outside',
             probe_address=kwargs.get('probe_2'),
             database=self.database
         )
@@ -60,26 +66,17 @@ class HenHal:
         print(self.on_board_thermometer.get_temperature())
 
     def run(self):
-        iterations = 0
+        start_timestamp = datetime.datetime.now()
         while True:
-            self.heater.on()
-            #   Once every five minutes
-            if iterations % 60 == 0:
-                self.on_board_thermometer.get_temperature()
-                #   Iterations also resets.
-                iterations = 0
-
-            #   Once a minute.
-            if iterations % 12 == 0:
+            current_timestamp = datetime.datetime.now()
+            difference_from_start = (current_timestamp - start_timestamp).seconds
+            if difference_from_start >= self.RESET_SECONDS:
+                #   Record the temperature data.
                 self.red_light.check_connection()
-
-            #   Once every thirty seconds.
-            if iterations % 6 == 0:
-                print(self.probe_1.get_temperature())
-                print(self.probe_2.get_temperature())
-
+                self.on_board_thermometer.get_temperature()
+                self.database.submit_data()
+                start_timestamp = current_timestamp
             time.sleep(5)
-            iterations += 1
 
     def run_hen_hal(self):
         try:

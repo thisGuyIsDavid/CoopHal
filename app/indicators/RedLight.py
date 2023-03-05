@@ -1,9 +1,9 @@
-import time
 import socket
-from app.devices.DeviceInterface import DeviceInterface
+
+from app.interfaces.IndicatorInterface import IndicatorInterface
 
 
-class RedLight(DeviceInterface):
+class RedLight(IndicatorInterface):
     """
     On if program is running and connected to the internet.
     """
