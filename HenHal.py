@@ -73,7 +73,9 @@ class HenHal:
             if difference_from_start >= self.RESET_SECONDS:
                 #   Record the temperature data.
                 self.red_light.check_connection()
-                self.on_board_thermometer.get_temperature()
+                self.on_board_thermometer.record_temperature()
+                self.probe_2.record_temperature()
+                self.probe_1.record_temperature()
                 self.database.submit_data()
                 start_timestamp = current_timestamp
             time.sleep(5)
